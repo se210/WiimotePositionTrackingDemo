@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include <algorithm>
 #include <chrono>
 #include <thread>
@@ -7,8 +8,9 @@
 #include <SDL_events.h>
 #include <SDL_video.h>
 
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#include <Windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #include <opencv2/opencv.hpp>
 
@@ -116,6 +118,8 @@ vector<cv::Point2f> get_image_points(wiimote* wiimote) {
             image_points.emplace_back(image_width - 1 - dot.rx, image_height - 1 - dot.ry);
         }
     }
+
+    cout << "image_points : " << image_points.size() << endl;
 
     // If all 4 points are visible, canonicalize the ordering
     if (image_points.size() == object_points.size()) {
